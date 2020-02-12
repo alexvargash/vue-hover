@@ -4,7 +4,7 @@
   "description": "A directive for adding dynamic hover styles to an HTML element.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx rimraf dist && bili"
   },
   "keywords": [
     "Vue",
@@ -14,5 +14,8 @@
     "vue-hover"
   ],
   "author": "Alex Vargas",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "bili": "^4.8.1"
+  }
 }
