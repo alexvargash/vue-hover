@@ -1,10 +1,11 @@
 {
   "name": "vue-hover",
   "version": "1.0.0",
-  "description": "A directive for adding dynamic hover styles to an HTML element.",
-  "main": "index.js",
+  "description": "A Vue plugin for adding dynamic hover styles to an HTML element.",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "scripts": {
-    "build": "npx rimraf dist && bili"
+    "build": "npx rimraf dist && bili --format es --format cjs"
   },
   "keywords": [
     "Vue",
