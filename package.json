@@ -1,0 +1,18 @@
+{
+  "name": "vue-hover",
+  "version": "1.0.0",
+  "description": "A directive for adding dynamic hover styles to an HTML element.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Vue",
+    "Vue.js",
+    "VueJS",
+    "hover",
+    "vue-hover"
+  ],
+  "author": "Alex Vargas",
+  "license": "MIT"
+}
