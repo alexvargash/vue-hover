@@ -1,9 +1,14 @@
 {
   "name": "vue-hover",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Vue plugin for adding dynamic hover styles to an HTML element.",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
+  "author": "Alex Vargas <alexvargas.dev@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alexvargash/vue-hover"
+  },
   "scripts": {
     "dev": "poi --serve",
     "build": "npx rimraf dist && bili --format es --format cjs"
