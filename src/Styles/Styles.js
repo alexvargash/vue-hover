@@ -9,18 +9,28 @@ class Styles {
    * @param {object} binding
    */
   constructor (element, binding) {
+    this.element = element
     this.important = binding.modifiers.important
     this.newStyles = new NewStyles(binding.value)
     this.oldStyles = new OldStyles(element.style.cssText)
   }
 
   /**
+   * Get the original styles of the element.
+   *
+   * @return {string} getOldStyles
+   */
+  getOldStyles () {
+    return this.element.style.cssText
+  }
+
+  /**
    * Get the old values and new values on array format, merge the arrays and
    * return a concatenated string form the merged vales.
    *
-   * @return {string} getStylesString
+   * @return {string} getNewStyles
    */
-  getStylesString () {
+  getNewStyles () {
     let newPropertyValues = this.newStyles.getPropertyAndValues()
     const newProperties = this.newStyles.getProperties()
 

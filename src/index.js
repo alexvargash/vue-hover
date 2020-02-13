@@ -1,22 +1,36 @@
-import Styles from './Styles/styles'
+import Styles from './styles/styles'
+
+function addNewStyles (event) {
+  this.style.cssText = this.options.newStyles
+}
+
+function addOldStyles (event) {
+  this.style.cssText = this.options.oldStyles
+}
 
 const VueHover = {
   install (Vue, options) {
     Vue.directive('hover', {
-      inserted (element, binding, vnode) {
-        if (!binding.value) {
-          return
+      bind (element, binding, vnode) {
+        if (binding.value) {
+          const styles = new Styles(element, binding)
+          element.options = {
+            oldStyles: styles.getOldStyles(),
+            newStyles: styles.getNewStyles()
+          }
         }
-
-        const oldStyles = element.style.cssText
-        const newStyles = new Styles(element, binding).getStylesString()
-
-        element.addEventListener('mouseover', () => {
-          element.style.cssText = newStyles
-        })
-        element.addEventListener('mouseleave', () => {
-          element.style.cssText = oldStyles
-        })
+      },
+      inserted (element, binding, vnode) {
+        if (binding.value) {
+          element.addEventListener('mouseover', addNewStyles)
+          element.addEventListener('mouseleave', addOldStyles)
+        }
+      },
+      unbind (element, binding, vnode) {
+        if (binding.value) {
+          element.removeEventListener('mouseover', addNewStyles)
+          element.removeEventListener('mouseleave', addOldStyles)
+        }
       }
     })
   }
