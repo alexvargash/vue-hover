@@ -155,21 +155,33 @@ function () {
   function Styles(element, binding) {
     _classCallCheck(this, Styles);
 
+    this.element = element;
     this.important = binding.modifiers.important;
     this.newStyles = new NewStyles(binding.value);
     this.oldStyles = new OldStyles(element.style.cssText);
   }
   /**
-   * Get the old values and new values on array format, merge the arrays and
-   * return a concatenated string form the merged vales.
+   * Get the original styles of the element.
    *
-   * @return {string} getStylesString
+   * @return {string} getOldStyles
    */
 
 
   _createClass(Styles, [{
-    key: "getStylesString",
-    value: function getStylesString() {
+    key: "getOldStyles",
+    value: function getOldStyles() {
+      return this.element.style.cssText;
+    }
+    /**
+     * Get the old values and new values on array format, merge the arrays and
+     * return a concatenated string form the merged vales.
+     *
+     * @return {string} getNewStyles
+     */
+
+  }, {
+    key: "getNewStyles",
+    value: function getNewStyles() {
       var newPropertyValues = this.newStyles.getPropertyAndValues();
       var newProperties = this.newStyles.getProperties();
       var oldPropertyValues = this.oldStyles.getPropertyAndValues();
@@ -220,22 +232,37 @@ function () {
   return Styles;
 }();
 
+function addNewStyles(event) {
+  this.style.cssText = this.options.newStyles;
+}
+
+function addOldStyles(event) {
+  this.style.cssText = this.options.oldStyles;
+}
+
 var VueHover = {
   install: function install(Vue, options) {
     Vue.directive('hover', {
-      inserted: function inserted(element, binding, vnode) {
-        if (!binding.value) {
-          return;
+      bind: function bind(element, binding, vnode) {
+        if (binding.value) {
+          var styles = new Styles(element, binding);
+          element.options = {
+            oldStyles: styles.getOldStyles(),
+            newStyles: styles.getNewStyles()
+          };
         }
-
-        var oldStyles = element.style.cssText;
-        var newStyles = new Styles(element, binding).getStylesString();
-        element.addEventListener('mouseover', function () {
-          element.style.cssText = newStyles;
-        });
-        element.addEventListener('mouseleave', function () {
-          element.style.cssText = oldStyles;
-        });
+      },
+      inserted: function inserted(element, binding, vnode) {
+        if (binding.value) {
+          element.addEventListener('mouseover', addNewStyles);
+          element.addEventListener('mouseleave', addOldStyles);
+        }
+      },
+      unbind: function unbind(element, binding, vnode) {
+        if (binding.value) {
+          element.removeEventListener('mouseover', addNewStyles);
+          element.removeEventListener('mouseleave', addOldStyles);
+        }
       }
     });
   }
