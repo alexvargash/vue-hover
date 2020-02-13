@@ -5,6 +5,7 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "scripts": {
+    "dev": "poi --serve",
     "build": "npx rimraf dist && bili --format es --format cjs"
   },
   "keywords": [
@@ -17,6 +18,9 @@
   "author": "Alex Vargas",
   "license": "MIT",
   "devDependencies": {
-    "bili": "^4.8.1"
+    "bili": "^4.8.1",
+    "poi": "^12.7.5",
+    "vue": "^2.6.11",
+    "vue-template-compiler": "^2.6.11"
   }
 }
