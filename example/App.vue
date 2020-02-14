@@ -1,7 +1,7 @@
 <template>
   <div class="max-w-2xl mx-auto py-10">
     <div
-      v-hover="{ backgroundColor: myVar}"
+      v-hover="{ backgroundColor: myVar, color: 'white', textAlign: 'right' }"
       :style="styleObject"
     >
       hello

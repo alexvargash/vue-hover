@@ -70,7 +70,7 @@ class Styles {
   makeStylesString (newPropertyValues) {
     let styleString = ''
     newPropertyValues.forEach((property) => {
-      styleString += this.important
+      styleString = this.important
         ? styleString += property[0] + ': ' + property[1] + ' !important; '
         : styleString += property[0] + ': ' + property[1] + '; '
     })
